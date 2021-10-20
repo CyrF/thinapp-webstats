@@ -1,0 +1,50 @@
+
+<script src="css/jquery-3.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="css/jquery.slim.min.js"><\/script>')</script><script src="css/bootstrap.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <script src="css/feather.js"></script>
+        <script src="css/Chart.js"></script>
+		<?php foreach ($datapoints as $pt) {echo "'{$pt['Mois']}',";} ?>
+        <script >/* globals Chart:false, feather:false src="css/dashboard.js"*/
+
+(function () {
+  'use strict'
+
+  feather.replace()
+
+  // Graphs
+  var ctx = document.getElementById('myChart')
+  // eslint-disable-next-line no-unused-vars
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [
+        <?php foreach ($datapoints as $pt) {echo "'{$pt['Mois']}',";} ?>
+      ],
+      datasets: [{
+        data: [
+          <?php foreach ($datapoints as $pt) {echo "'{$pt['n']}',";} ?>
+        ],
+        lineTension: 0,
+        backgroundColor: 'transparent',
+        borderColor: '#007bff',
+        borderWidth: 4,
+        pointBackgroundColor: '#007bff'
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false
+          }
+        }]
+      },
+      legend: {
+        display: false
+      }
+    }
+  })
+})()
+</script>
+
+</body></html>
